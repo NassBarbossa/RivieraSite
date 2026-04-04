@@ -1,0 +1,87 @@
+---
+// src/components/Footer.astro
+const socials = [
+  { name: 'YouTube', url: '#', icon: '▶' },
+  { name: 'Instagram', url: '#', icon: '📷' },
+  { name: 'TikTok', url: '#', icon: '♪' },
+  { name: 'X', url: '#', icon: '𝕏' },
+  { name: 'LinkedIn', url: '#', icon: 'in' },
+];
+---
+
+<footer class="footer">
+  <div class="footer__container">
+    <div class="footer__socials">
+      {socials.map((s) => (
+        <a href={s.url} target="_blank" rel="noopener" aria-label={s.name} class="footer__social-link">
+          <span>{s.icon}</span>
+        </a>
+      ))}
+    </div>
+    <div class="footer__links">
+      <a href="https://formation.nassriviera.com" target="_blank" rel="noopener">Formations</a>
+    </div>
+    <p class="footer__copy">&copy; {new Date().getFullYear()} Nass Riviera. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: var(--space-xl) var(--space-md);
+    text-align: center;
+  }
+
+  .footer__container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    align-items: center;
+  }
+
+  .footer__socials {
+    display: flex;
+    gap: var(--space-sm);
+  }
+
+  .footer__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    color: var(--color-text);
+    font-size: 1rem;
+    transition: border-color 0.2s, color 0.2s;
+    text-decoration: none;
+  }
+
+  .footer__social-link:hover {
+    border-color: var(--color-cyan);
+    color: var(--color-cyan);
+    text-decoration: none;
+  }
+
+  .footer__links {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .footer__links a {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  .footer__links a:hover {
+    color: var(--color-cyan);
+  }
+
+  .footer__copy {
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+  }
+</style>
