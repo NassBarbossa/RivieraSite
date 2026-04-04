@@ -1,0 +1,71 @@
+---
+// src/components/Hero.astro
+---
+
+<section class="hero">
+  <div class="hero__overlay"></div>
+  <div class="hero__content">
+    <h1 class="hero__title">Nass Riviera</h1>
+    <p class="hero__subtitle">Créateur de contenu & Entrepreneur</p>
+    <button class="hero__cta" data-open-popup>Formation gratuite</button>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('/images/hero.jpg') center/cover no-repeat;
+  }
+
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 10, 10, 0.6),
+      rgba(10, 10, 10, 0.9)
+    );
+  }
+
+  .hero__content {
+    position: relative;
+    text-align: center;
+    padding: var(--space-md);
+    max-width: 600px;
+  }
+
+  .hero__title {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+    background: linear-gradient(135deg, var(--color-cyan), var(--color-text));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero__subtitle {
+    font-size: clamp(1rem, 3vw, 1.35rem);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero__cta {
+    background-color: var(--color-orange);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .hero__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(255, 107, 0, 0.4);
+  }
+</style>
