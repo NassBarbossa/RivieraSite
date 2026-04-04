@@ -1,0 +1,74 @@
+---
+// src/components/AboutMe.astro
+---
+
+<section class="about" id="qui-suis-je">
+  <div class="about__container">
+    <div class="about__image">
+      <img src="/images/profile.jpg" alt="Nass Riviera" />
+    </div>
+    <div class="about__text">
+      <h2 class="about__title">Qui suis-je ?</h2>
+      <p class="about__description">
+        Je suis Nass Riviera, créateur de contenu et entrepreneur.
+        Je partage mon parcours et mes stratégies pour aider ceux qui veulent
+        se lancer dans l'entrepreneuriat et la création de contenu.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    padding: var(--space-2xl) var(--space-md);
+  }
+
+  .about__container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .about__image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--color-cyan);
+    flex-shrink: 0;
+  }
+
+  .about__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about__title {
+    font-size: 1.75rem;
+    color: var(--color-cyan);
+    margin-bottom: var(--space-sm);
+  }
+
+  .about__description {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  /* Desktop */
+  @media (min-width: 768px) {
+    .about__container {
+      flex-direction: row;
+      text-align: left;
+    }
+
+    .about__image {
+      width: 250px;
+      height: 250px;
+    }
+  }
+</style>
