@@ -1,6 +1,7 @@
 ---
 // src/layouts/Layout.astro
 import Navbar from '../components/Navbar.astro';
+import Popup from '../components/Popup.astro';
 
 interface Props {
   title: string;
@@ -23,6 +24,7 @@ const { title } = Astro.props;
   <body>
     <Navbar />
     <slot />
+    <Popup />
   </body>
 </html>
 
