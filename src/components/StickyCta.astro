@@ -1,0 +1,57 @@
+---
+// src/components/StickyCta.astro
+---
+
+<div class="sticky-cta">
+  <button class="sticky-cta__button" data-open-popup>
+    Accède à la formation gratuite
+  </button>
+</div>
+
+<style>
+  .sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--space-lg);
+    background: linear-gradient(
+      to top,
+      var(--color-bg) 60%,
+      rgba(19, 19, 19, 0.9) 80%,
+      transparent 100%
+    );
+    z-index: 40;
+  }
+
+  .sticky-cta__button {
+    width: 100%;
+    background-color: var(--color-orange);
+    color: white;
+    font-family: var(--font-headline);
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 1.25rem;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-cta);
+    transition: transform 0.2s;
+  }
+
+  .sticky-cta__button:active {
+    transform: scale(0.95);
+  }
+
+  @media (min-width: 768px) {
+    .sticky-cta {
+      padding: var(--space-lg) var(--space-4xl);
+    }
+
+    .sticky-cta__button {
+      max-width: 480px;
+      margin: 0 auto;
+      display: block;
+    }
+  }
+</style>

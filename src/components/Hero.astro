@@ -3,69 +3,118 @@
 ---
 
 <section class="hero">
-  <div class="hero__overlay"></div>
-  <div class="hero__content">
-    <h1 class="hero__title">Nass Riviera</h1>
-    <p class="hero__subtitle">Créateur de contenu & Entrepreneur</p>
-    <button class="hero__cta" data-open-popup>Formation gratuite</button>
+  <!-- Profile photo -->
+  <div class="hero__photo-wrap">
+    <div class="hero__photo">
+      <img src="/images/Hero.png" alt="Nass Riviera" />
+    </div>
+    <div class="hero__badge">
+      <span>VibeCoder</span>
+    </div>
   </div>
+
+  <!-- Name -->
+  <h1 class="hero__name">
+    NASS <br />
+    <span class="hero__name-gradient">RIVIERA</span>
+  </h1>
+
+  <!-- Tagline -->
+  <p class="hero__tagline">
+    Entrepreneur & Investisseur depuis 2017, c'est en 2026 que je prends la décision <strong>radicale</strong> d'arrêter les cryptomonnaies suite à un dégoût viscéral. Je partage en toute humilité la reconstruction d'un écosystème grâce au VibeCoding.
+  </p>
 </section>
 
 <style>
   .hero {
-    position: relative;
-    min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background: url('/images/hero.jpg') center/cover no-repeat;
-  }
-
-  .hero__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(10, 10, 10, 0.6),
-      rgba(10, 10, 10, 0.9)
-    );
-  }
-
-  .hero__content {
-    position: relative;
     text-align: center;
-    padding: var(--space-md);
-    max-width: 600px;
+    padding: var(--space-2xl) var(--space-lg) var(--space-xl);
   }
 
-  .hero__title {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    font-weight: 700;
-    margin-bottom: var(--space-xs);
-    background: linear-gradient(135deg, var(--color-cyan), var(--color-text));
+  /* Photo */
+  .hero__photo-wrap {
+    position: relative;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .hero__photo {
+    width: 12rem;
+    height: 12rem;
+    border-radius: var(--radius-full);
+    overflow: hidden;
+  }
+
+  .hero__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-full);
+    transition: filter 0.7s ease;
+    transform: scale(1.05);
+  }
+
+  .hero__photo:hover img {
+    filter: grayscale(0%);
+  }
+
+  .hero__badge {
+    position: absolute;
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    padding: 0.25rem 1rem;
+    border-radius: var(--radius-full);
+    background: rgba(19, 19, 19, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__badge span {
+    font-family: var(--font-label);
+    font-size: 0.625rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-cyan);
+  }
+
+  /* Name */
+  .hero__name {
+    font-family: var(--font-headline);
+    font-size: clamp(3rem, 12vw, 5rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    color: white;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero__name-gradient {
+    background: linear-gradient(135deg, #00D4FF 0%, #A8E8FF 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .hero__subtitle {
-    font-size: clamp(1rem, 3vw, 1.35rem);
+  /* Tagline */
+  .hero__tagline {
+    max-width: 20rem;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
     color: var(--color-text-muted);
-    margin-bottom: var(--space-lg);
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+    margin-bottom: var(--space-xl);
   }
 
-  .hero__cta {
-    background-color: var(--color-orange);
-    color: white;
-    font-size: 1.1rem;
-    font-weight: 700;
-    padding: var(--space-sm) var(--space-lg);
-    border-radius: 8px;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
 
-  .hero__cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(255, 107, 0, 0.4);
+  @media (min-width: 768px) {
+    .hero__name {
+      font-size: 5rem;
+    }
   }
 </style>

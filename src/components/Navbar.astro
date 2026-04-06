@@ -2,20 +2,12 @@
 // src/components/Navbar.astro
 ---
 
-<nav class="navbar">
-  <a href="/" class="navbar__logo">NassRiviera</a>
-
-  <button class="navbar__toggle" aria-label="Menu" aria-expanded="false">
-    <span class="navbar__hamburger"></span>
-  </button>
-
-  <ul class="navbar__menu">
-    <li><a href="/">Accueil</a></li>
-    <li><a href="/#qui-suis-je">Qui suis-je</a></li>
-    <li><a href="/contact">Contact</a></li>
-    <li><button class="navbar__cta" data-open-popup>Formation gratuite</button></li>
-  </ul>
-</nav>
+<header class="navbar">
+  <a href="/" class="navbar__logo">NASS RIVIERA</a>
+  <div class="navbar__right">
+    <a href="/contact" class="navbar__link">Contact</a>
+  </div>
+</header>
 
 <style>
   .navbar {
@@ -23,147 +15,42 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 50;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--space-sm) var(--space-md);
-    background-color: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(8px);
+    padding: var(--space-lg) var(--space-xl);
+    background-color: rgba(19, 19, 19, 0.6);
+    backdrop-filter: blur(20px);
   }
 
   .navbar__logo {
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-family: var(--font-headline);
+    font-size: 1.2rem;
+    font-weight: 900;
     color: var(--color-cyan);
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
     text-decoration: none;
   }
 
-  .navbar__toggle {
+  .navbar__right {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 4px;
-  }
-
-  .navbar__hamburger,
-  .navbar__hamburger::before,
-  .navbar__hamburger::after {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background-color: var(--color-text);
-    transition: transform 0.3s, opacity 0.3s;
-  }
-
-  .navbar__hamburger {
-    position: relative;
-  }
-
-  .navbar__hamburger::before,
-  .navbar__hamburger::after {
-    content: '';
-    position: absolute;
-    left: 0;
-  }
-
-  .navbar__hamburger::before {
-    top: -7px;
-  }
-
-  .navbar__hamburger::after {
-    top: 7px;
-  }
-
-  /* Hamburger open state */
-  .navbar__toggle[aria-expanded='true'] .navbar__hamburger {
-    background-color: transparent;
-  }
-
-  .navbar__toggle[aria-expanded='true'] .navbar__hamburger::before {
-    top: 0;
-    transform: rotate(45deg);
-  }
-
-  .navbar__toggle[aria-expanded='true'] .navbar__hamburger::after {
-    top: 0;
-    transform: rotate(-45deg);
-  }
-
-  .navbar__menu {
-    display: none;
-    list-style: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: rgba(10, 10, 10, 0.98);
-    padding: var(--space-sm) 0;
-    flex-direction: column;
     align-items: center;
-    gap: var(--space-sm);
+    gap: var(--space-md);
   }
 
-  .navbar__menu.is-open {
-    display: flex;
-  }
-
-  .navbar__menu a {
-    color: var(--color-text);
-    font-weight: 600;
-    padding: var(--space-xs) var(--space-sm);
-  }
-
-  .navbar__menu a:hover {
-    color: var(--color-cyan);
-    text-decoration: none;
-  }
-
-  .navbar__cta {
-    background-color: var(--color-orange);
-    color: white;
+  .navbar__link {
+    font-family: var(--font-headline);
     font-weight: 700;
-    padding: var(--space-xs) var(--space-md);
-    border-radius: 6px;
-    font-size: 0.95rem;
-    transition: opacity 0.2s;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    transition: color 0.3s;
   }
 
-  .navbar__cta:hover {
-    opacity: 0.85;
-  }
-
-  /* Desktop */
-  @media (min-width: 768px) {
-    .navbar__toggle {
-      display: none;
-    }
-
-    .navbar__menu {
-      display: flex;
-      position: static;
-      flex-direction: row;
-      background: none;
-      padding: 0;
-    }
+  .navbar__link:hover {
+    color: var(--color-cyan-light);
   }
 </style>
-
-<script>
-  const toggle = document.querySelector('.navbar__toggle');
-  const menu = document.querySelector('.navbar__menu');
-
-  toggle?.addEventListener('click', () => {
-    const expanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!expanded));
-    menu?.classList.toggle('is-open');
-  });
-
-  // Close menu on link click (mobile)
-  menu?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      toggle?.setAttribute('aria-expanded', 'false');
-      menu.classList.remove('is-open');
-    });
-  });
-</script>

@@ -1,0 +1,206 @@
+---
+// src/components/Activities.astro
+const activities = [
+  {
+    icon: "youtube",
+    bgIcon: "youtube",
+    title: "YOUTUBE",
+    description: "Je vulgarise le VibeCoding sur YouTube et partage mes expériences.",
+    cta: "Regarder",
+    customSvg: true,
+  },
+  {
+    icon: "podcasts",
+    bgIcon: "mic_external_on",
+    title: "VIBECAST",
+    description: "Un podcast dédié au VibeCoding où je reçois des profils divers mais toujours intéressants pour tenir la promesse du VibeCast : Le raccourci vers la liberté.",
+    cta: "Listen Now",
+  },
+  {
+    icon: "school",
+    bgIcon: "model_training",
+    title: "ACCOMPAGNEMENT",
+    description: "J'ai toujours dit que dans la vie soit tu payes avec du temps, soit tu payes avec de l'argent, je te laisse décider ce qui est le mieux pour toi.",
+    cta: "En savoir plus",
+  },
+  {
+    icon: "business_center",
+    bgIcon: "handshake",
+    title: "RIVIERA AGENCY",
+    description: "Une agence dédiée aux CEO sans CTO qui veulent augmenter leurs revenus par 4 sans passer 2 fois plus de temps.",
+    cta: "Work With Us",
+  },
+];
+---
+
+<section class="activities">
+  <div class="activities__header">
+    <h2 class="activities__title">Écosystème</h2>
+  </div>
+
+  <div class="activities__grid">
+    {activities.map((a) => (
+      <div class="activity-card glass-card">
+        <div class="activity-card__bg-icon">
+          {a.customSvg ? (
+            <svg viewBox="0 0 24 24" fill="currentColor" class="activity-card__svg-bg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          ) : (
+            <span class="material-symbols-outlined">{a.bgIcon}</span>
+          )}
+        </div>
+        {a.customSvg ? (
+          <svg viewBox="0 0 24 24" fill="currentColor" class="activity-card__svg-icon"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        ) : (
+          <span class="material-symbols-outlined activity-card__icon">{a.icon}</span>
+        )}
+        <h3 class="activity-card__title">{a.title}</h3>
+        <p class="activity-card__desc">{a.description}</p>
+        <div class="activity-card__cta">
+          {a.cta}
+          <span class="material-symbols-outlined activity-card__arrow">arrow_forward</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .activities {
+    padding: 0 var(--space-lg) var(--space-3xl);
+    max-width: var(--max-w-content);
+    margin: 0 auto;
+  }
+
+  .activities__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+  }
+
+  .activities__title {
+    font-family: var(--font-headline);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.02em;
+  }
+
+  .activities__count {
+    font-family: var(--font-label);
+    font-size: 0.625rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-cyan);
+  }
+
+  .activities__grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  /* Card */
+  .activity-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    transition: transform 0.5s ease;
+  }
+
+  .activity-card:hover {
+    transform: scale(0.98);
+  }
+
+  .activity-card__bg-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: var(--space-md);
+    opacity: 0.08;
+    transition: opacity 0.5s;
+  }
+
+  .activity-card:hover .activity-card__bg-icon {
+    opacity: 0.25;
+  }
+
+  .activity-card__bg-icon .material-symbols-outlined {
+    font-size: 4.5rem;
+    color: var(--color-cyan);
+  }
+
+  .activity-card__svg-bg {
+    width: 4.5rem;
+    height: 4.5rem;
+    color: var(--color-cyan);
+  }
+
+  .activity-card__svg-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--color-cyan);
+    margin-bottom: var(--space-md);
+    display: block;
+  }
+
+  .activity-card__icon {
+    color: var(--color-cyan);
+    margin-bottom: var(--space-md);
+    display: block;
+  }
+
+  .activity-card__title {
+    font-family: var(--font-headline);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .activity-card__desc {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    max-width: 70%;
+  }
+
+  .activity-card__cta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+    font-family: var(--font-label);
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: var(--color-cyan);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .activity-card__arrow {
+    font-size: 0.75rem;
+    transition: transform 0.2s;
+  }
+
+  .activity-card:hover .activity-card__arrow {
+    transform: translateX(4px);
+  }
+
+  @media (min-width: 768px) {
+    .activities__grid {
+      flex-direction: row;
+    }
+
+    .activity-card {
+      flex: 1;
+    }
+
+    .activity-card__desc {
+      max-width: 100%;
+    }
+  }
+</style>

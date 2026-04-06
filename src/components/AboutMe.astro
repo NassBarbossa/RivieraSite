@@ -5,7 +5,7 @@
 <section class="about" id="qui-suis-je">
   <div class="about__container">
     <div class="about__image">
-      <img src="/images/profile.jpg" alt="Nass Riviera" />
+      <img src="/images/Profile.png" alt="Nass Riviera" />
     </div>
     <div class="about__text">
       <h2 class="about__title">Qui suis-je ?</h2>
@@ -20,25 +20,27 @@
 
 <style>
   .about {
-    padding: var(--space-2xl) var(--space-md);
+    background-color: var(--color-bg);
   }
 
   .about__container {
-    max-width: 900px;
+    max-width: var(--max-w-content);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-lg);
+    gap: var(--space-xl);
+    text-align: center;
   }
 
   .about__image {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     overflow: hidden;
     border: 3px solid var(--color-cyan);
     flex-shrink: 0;
+    box-shadow: var(--shadow-glow-cyan);
   }
 
   .about__image img {
@@ -50,13 +52,14 @@
   .about__title {
     font-size: 1.75rem;
     color: var(--color-cyan);
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
   }
 
   .about__description {
     color: var(--color-text-muted);
     font-size: 1.05rem;
     line-height: 1.8;
+    max-width: var(--max-w-text);
   }
 
   /* Desktop */
@@ -64,11 +67,12 @@
     .about__container {
       flex-direction: row;
       text-align: left;
+      gap: var(--space-3xl);
     }
 
     .about__image {
-      width: 250px;
-      height: 250px;
+      width: 220px;
+      height: 220px;
     }
   }
 </style>
