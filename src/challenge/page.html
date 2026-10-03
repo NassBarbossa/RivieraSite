@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="fr" data-scene="golden">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>punk6995 · 10K → 100K</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Public+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font: 18px/1.55 'Public Sans', system-ui, sans-serif; }
+  a { color: inherit; }
+  .big { font-family: 'Archivo Black', sans-serif; letter-spacing: -.02em; line-height: .95; }
+
+  .meta { background: var(--ink); color: #fff; display: flex; flex-wrap: wrap; gap: 8px 32px; padding: 14px 24px; font-size: 15px; justify-content: center; }
+  .meta span b { color: var(--skin); }
+
+  section { max-width: 1040px; margin: 0 auto; padding: 72px 24px 0; }
+  h2 { font-size: clamp(34px, 5vw, 56px); margin-bottom: 26px; }
+  .how { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .how div { background: #fff; border: 2px solid var(--ink); border-radius: 10px; padding: 22px; box-shadow: 5px 5px 0 var(--ink); }
+  .how b { display: block; font-family: 'Archivo Black'; font-size: 22px; margin-bottom: 6px; }
+  .how p { color: #3b3a37; font-size: 17px; }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .list { border-radius: 10px; padding: 24px; }
+  .list.yes { background: var(--punk); color: #fff; }
+  .list.no { background: var(--ink); color: #fff; }
+  .list h3 { font-family: 'Archivo Black'; font-size: 22px; margin-bottom: 12px; }
+  .list li { list-style: none; padding: 9px 0; border-top: 1px solid rgba(255,255,255,.2); font-size: 18px; }
+  .list.no li span { text-decoration: line-through; text-decoration-color: var(--skin); text-decoration-thickness: 3px; }
+
+  .prev { display: grid; grid-template-columns: auto 1fr; gap: 30px; align-items: center; background: var(--skin); border-radius: 10px; padding: 28px 30px; border: 2px solid var(--ink); }
+  .prev .big { font-size: clamp(48px, 7vw, 92px); }
+  .prev p { font-size: 18px; }
+  .prev small { display: block; margin-top: 8px; font-size: 15px; color: #3b2b17; }
+
+  .cta { text-align: center; padding-bottom: 80px; }
+  .cta p { color: #3b3a37; margin-bottom: 20px; }
+  form { display: flex; gap: 8px; max-width: 520px; margin: 0 auto; }
+  input { flex: 1; min-width: 0; font: 17px 'Public Sans'; padding: 15px 16px; border: 2px solid var(--ink); border-radius: 8px; background: #fff; }
+  input:focus { outline: 3px solid var(--punk); }
+  button { font: 16px 'Archivo Black'; padding: 0 22px; background: var(--ink); color: #fff; border: 0; border-radius: 8px; cursor: pointer; }
+  button:hover { background: var(--punk-d); }
+  .todo { background: rgba(255,255,255,.25); padding: 0 6px; border-radius: 4px; }
+  footer { background: var(--ink); color: #9a968d; font-size: 14px; padding: 22px 24px; text-align: center; }
+
+  @media (max-width: 820px) {
+    .how, .split { grid-template-columns: 1fr; }
+    .prev { grid-template-columns: 1fr; gap: 10px; }
+  }
+
+
+  /* ---------- hero (golden hour + formation CTA) ---------- */
+  section.hero { max-width: none; margin: 0; padding: 0; }
+  :root { --punk: #648596; --skin: #dbb17f; --ink: #0b0b0b; }
+  .hero { position: relative; height: 100vh; min-height: 640px; overflow: hidden; }
+  [data-scene="golden"] .hero { background: linear-gradient(180deg, #33495a 0%, #4f6c7b 28%, #7f98a3 55%, #d9b88f 82%, #efcf9f 100%); }
+  [data-scene="pixel"] .hero { background: linear-gradient(180deg, #45606e 0 14%, #4f6c7b 14% 28%, #5a7888 28% 42%, #648596 42% 58%, #7393a2 58% 72%, #87a3ae 72% 100%); }
+  [data-scene="night"] .hero { background: linear-gradient(180deg, #070c12 0%, #0f1b25 40%, #213644 75%, #36505e 100%); }
+  svg.world { position: absolute; inset: 0; width: 100%; height: 100%; }
+  svg.world image { image-rendering: pixelated; }
+  [data-scene="pixel"] svg.world { shape-rendering: crispEdges; }
+  .hero::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,.32) 100%); }
+  .top { position: absolute; z-index: 3; inset: 0 0 auto 0; display: flex; justify-content: space-between; align-items: center; padding: 20px 28px; }
+  .top b { font-family: 'Archivo Black'; font-size: 18px; color: #fff; }
+  .top a { background: var(--ink); color: #fff; text-decoration: none; padding: 10px 16px; font-weight: 700; font-size: 15px; border-radius: 6px; }
+  .title { position: absolute; z-index: 3; left: 28px; top: 16%; color: #fff; opacity: 0; text-shadow: 0 4px 30px rgba(0,0,0,.25); }
+  .title h1 { font-family: 'Archivo Black'; font-size: clamp(56px, 8.5vw, 140px); line-height: .9; letter-spacing: -.03em; }
+  .title h1 span { color: var(--skin); }
+  .title p { font-size: 20px; margin-top: 18px; max-width: 30ch; color: #eef2f4; }
+  .hud { position: absolute; z-index: 6; left: 28px; bottom: 26px; color: #fff; transition: bottom .8s; }
+  .hero:not(.wide) .hud { bottom: calc(9vh + 18px); }
+  .hud small { display: block; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .7; }
+  #count { font-family: 'Archivo Black'; font-size: clamp(34px, 4vw, 64px); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  #count.win { color: var(--skin); }
+  .bars { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+  .bars::before, .bars::after { content: ''; position: absolute; left: 0; right: 0; height: 9vh; background: #000; transition: transform 1s cubic-bezier(.6,0,.2,1); }
+  .bars::before { top: 0; } .bars::after { bottom: 0; }
+  .hero.wide .bars::before { transform: translateY(-100%); } .hero.wide .bars::after { transform: translateY(100%); }
+  .rain { position: absolute; inset: 0; z-index: 5; pointer-events: none; overflow: hidden; }
+  .conf { position: absolute; top: 0; left: 0; width: 12px; height: 12px; will-change: transform; }
+  .twinkle { animation: tw 2.4s ease-in-out infinite; }
+  @keyframes tw { 50% { opacity: .25; } }
+
+  .cta-formation { display: inline-flex; align-items: center; gap: 12px; background: #dbb17f; color: #0b0b0b; text-decoration: none;
+    font: 18px 'Archivo Black', sans-serif; letter-spacing: -.01em; padding: 16px 22px 16px 18px; border-radius: 10px;
+    box-shadow: 0 6px 0 #9c7748, 0 14px 30px rgba(0,0,0,.25); transition: transform .15s, box-shadow .15s; position: relative; overflow: hidden; white-space: nowrap; }
+  .cta-formation:hover { transform: translateY(2px); box-shadow: 0 4px 0 #9c7748, 0 10px 24px rgba(0,0,0,.25); }
+  .cta-formation:active { transform: translateY(6px); box-shadow: 0 0 0 #9c7748; }
+  .cta-formation .gift { width: 26px; height: 26px; flex: none; }
+  .cta-formation .arr { transition: transform .2s; }
+  .cta-formation:hover .arr { transform: translateX(4px); }
+  .cta-formation::after { content: ''; position: absolute; top: 0; bottom: 0; width: 60px; left: -80px; transform: skewX(-20deg);
+    background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0)); animation: shine 3.2s 1s infinite; }
+  @keyframes shine { 0%, 70% { left: -80px; } 100% { left: 110%; } }
+  .title .row { display: flex; align-items: center; gap: 18px; margin-top: 28px; flex-wrap: wrap; }
+  .title .row small { font-size: 14px; color: #eef2f4; opacity: .85; }
+  .replay { position: absolute; right: 28px; bottom: 26px; z-index: 5; background: none; border: 0; color: #fff; font-weight: 700; font-size: 13px; cursor: pointer; opacity: 0; transition: opacity .4s; }
+  .hero.done .replay { opacity: .8; }
+
+  :root { --paper: #f4eee3; --punk-d: #4f6c7b; }
+  /* ---------- formation offerte ---------- */
+  #formation { scroll-margin-top: 20px; }
+  .form-box { background: #0b0b0b; color: #fff; border-radius: 16px; padding: 40px; position: relative; overflow: hidden; }
+  .form-box::before { content: ''; position: absolute; right: -120px; top: -160px; width: 520px; height: 520px; border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(219,177,127,.35), rgba(219,177,127,0)); }
+  .form-box .tag { display: inline-flex; align-items: center; gap: 10px; background: #dbb17f; color: #0b0b0b; font-weight: 700; font-size: 14px; padding: 6px 12px; border-radius: 99px; position: relative; }
+  .form-box h2 { margin: 18px 0 10px; color: #fff; position: relative; }
+  .form-box h2 span { color: #dbb17f; }
+  .form-box > p { color: #c9c4ba; max-width: 52ch; position: relative; }
+  .videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 28px 0; position: relative; }
+  .vid { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; overflow: hidden; text-decoration: none; color: #fff; transition: transform .2s, border-color .2s; }
+  .vid:hover { transform: translateY(-4px); border-color: #dbb17f; }
+  .vid .thumb { aspect-ratio: 16 / 9; position: relative; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(160deg, #4f6c7b, #648596 55%, #d9b88f); }
+  .vid .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .vid .thumb b { z-index: 1; position: absolute; left: 12px; top: 10px; font: 15px 'Archivo Black'; color: #0b0b0b; background: #dbb17f; padding: 2px 8px; border-radius: 6px; }
+  .vid .play { position: relative; z-index: 1; width: 54px; height: 54px; border-radius: 50%; background: rgba(11,11,11,.8); display: flex; align-items: center; justify-content: center; }
+  .vid .play::after { content: ''; border-left: 16px solid #fff; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 4px; }
+  .vid .txt { padding: 14px 16px 16px; font-weight: 700; font-size: 17px; line-height: 1.3; }
+  .form-box .cta-formation { position: relative; }
+  .todo2 { color: #8f8a80; font-size: 14px; margin-left: 14px; }
+  @media (max-width: 820px) { .videos { grid-template-columns: 1fr; } .form-box { padding: 26px; } }
+
+  /* ---------- communauté privée ---------- */
+  .comm { position: relative; background: #fff; border: 2px solid #0b0b0b; border-radius: 16px; box-shadow: 6px 6px 0 #0b0b0b; padding: 40px 28px 36px; overflow: hidden; }
+  .comm-punk { width: 96px; height: 96px; image-rendering: pixelated; display: block; margin: 0 auto 10px; }
+  .comm h2 { margin-bottom: 10px; }
+  .comm p { color: #3b3a37; margin-bottom: 24px; }
+  .comm-btn { font-size: 18px; }
+
+  /* ---------- wallet en direct (CoinStats) ---------- */
+  #wallet { padding-bottom: 80px; }
+  .wl-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+  .wl-head h2 { margin: 0; }
+  .wl-live { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: #3b3a37; background: #fff; border: 2px solid #0b0b0b; border-radius: 99px; padding: 6px 12px; }
+  .wl-live i { width: 9px; height: 9px; border-radius: 50%; background: #9a968d; }
+  .wl-live.on i { background: #2fbf71; box-shadow: 0 0 0 4px rgba(47,191,113,.2); animation: blink 1.6s infinite; }
+  @keyframes blink { 50% { opacity: .35; } }
+  .wl-total { background: #0b0b0b; color: #fff; border-radius: 16px; padding: 26px 28px; display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; }
+  .wl-total small { display: block; font-size: 13px; color: #9a968d; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+  .wl-total b#wlTotal { font: clamp(40px, 5vw, 64px) 'Archivo Black'; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .wl-goal .row { display: flex; justify-content: space-between; font-size: 14px; color: #c9c4ba; margin-bottom: 10px; }
+  .wl-goal .row b { color: #fff; } #wlPct { color: #dbb17f; font-weight: 700; }
+  .wl-goal .bar { height: 12px; border-radius: 99px; background: #262626; overflow: hidden; }
+  .wl-goal .bar i { display: block; height: 100%; width: 0; background: #dbb17f; border-radius: 99px; transition: width 1s; }
+  .wl-list { display: grid; gap: 14px; margin-top: 14px; }
+  .wl-empty { border: 2px dashed #b9b2a5; border-radius: 14px; padding: 26px; text-align: center; color: #6d6a64; }
+  .wl-card { background: #fff; border: 2px solid #0b0b0b; border-radius: 14px; padding: 18px 20px; }
+  .wl-card .h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .wl-card .h b { font: 20px 'Archivo Black'; }
+  .wl-card .h a { font-size: 14px; color: #3b3a37; }
+  .wl-card .h .v { font: 22px 'Archivo Black'; font-variant-numeric: tabular-nums; }
+  .wl-card table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 15px; font-variant-numeric: tabular-nums; }
+  .wl-card td { padding: 8px 0; border-top: 1px solid #ece6da; }
+  .wl-card td.r { text-align: right; }
+  .wl-card .up { color: #1f9d55; } .wl-card .dn { color: #c2410c; }
+  .wl-src { margin-top: 14px; font-size: 13px; color: #6d6a64; }
+  @media (max-width: 820px) { .wl-total { grid-template-columns: 1fr; gap: 18px; } }
+
+  /* ---------- challenge en temps réel ---------- */
+  .rt-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+  .rt-head h2 { margin: 0; }
+  .rt-card { background: #0b0b0b; color: #fff; border-radius: 18px; padding: 26px 28px 18px; }
+  .rt-top { display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: end; }
+  .rt-top small { display: block; font-size: 13px; color: #9a968d; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+  .rt-bal { font: clamp(48px, 6vw, 84px) 'Archivo Black'; letter-spacing: -.03em; line-height: 1; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .rt-chg { color: #4fd48a; font-weight: 700; margin-top: 8px; }
+  .rt-goal .row { display: flex; justify-content: space-between; font-size: 14px; color: #c9c4ba; margin-bottom: 10px; }
+  .rt-goal .row b { color: #fff; } #rtX { color: #dbb17f; font-weight: 700; }
+  .rt-goal .bar { height: 12px; border-radius: 99px; background: #262626; overflow: hidden; }
+  .rt-goal .bar i { display: block; height: 100%; min-width: 12px; background: #dbb17f; border-radius: 99px; }
+  .rt-chart { position: relative; margin-top: 26px; }
+  .rt-chart svg { width: 100%; height: 300px; display: block; overflow: visible; }
+  .rt-ranges { position: absolute; right: 0; top: -6px; display: flex; gap: 4px; z-index: 2; }
+  .rt-ranges button { background: none; border: 0; color: #8a857c; font: 700 13px 'Public Sans'; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
+  .rt-ranges button.on { background: #222; color: #fff; }
+  .rt-dot { position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: #dbb17f; box-shadow: 0 0 0 5px rgba(219,177,127,.25); pointer-events: none; }
+  .rt-tip { position: absolute; transform: translate(-50%, -130%); background: #fff; color: #0b0b0b; font-weight: 700; font-size: 13px; padding: 6px 10px; border-radius: 8px; white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity .15s; }
+  .rt-wait { position: absolute; inset: 40px 0 30px; display: none; align-items: center; justify-content: center; color: #8a857c; font-weight: 700; }
+  .rt-chart.pending .rt-wait { display: flex; }
+  .rt-chart.pending svg, .rt-chart.pending .rt-dot, .rt-chart.pending .rt-axis, .rt-chart.pending .rt-ranges { visibility: hidden; }
+  .rt-chg.dn { color: #f07a5a; }
+  .rt-axis { display: flex; justify-content: space-between; font-size: 12px; color: #6f6b63; margin-top: 8px; }
+  .rt-sub { font-size: clamp(28px, 3.4vw, 40px); margin: 34px 0 14px; }
+  .rt-wallets { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .rt-w { background: #fff; border: 2px solid #0b0b0b; border-radius: 14px; padding: 18px; }
+  .rt-wh { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .rt-wh b { font: 20px 'Archivo Black'; }
+  .rt-wh small { color: #6d6a64; font-size: 13px; }
+  .chain { width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 17px; }
+  .chain.sol { background: linear-gradient(135deg, #9945ff, #14f195); }
+  .chain.evm { background: #627eea; }
+  .rt-field { display: flex; border: 2px solid #0b0b0b; border-radius: 10px; overflow: hidden; }
+  .rt-field input { flex: 1; min-width: 0; border: 0; padding: 12px 14px; font: 13px ui-monospace, Menlo, Consolas, monospace; text-overflow: ellipsis; color: #3b3a37; background: #f7f3eb; }
+  .rt-field button { border: 0; border-left: 2px solid #0b0b0b; background: #dbb17f; font: 700 14px 'Public Sans'; padding: 0 16px; cursor: pointer; }
+  .rt-field button:hover { background: #e7c393; }
+  .rt-link { display: inline-block; margin-top: 10px; font-size: 14px; color: #3b3a37; }
+  @media (max-width: 820px) { .rt-top { grid-template-columns: 1fr; gap: 20px; } .rt-wallets { grid-template-columns: 1fr; } .rt-chart svg { height: 220px; } .rt-ranges { position: static; justify-content: flex-end; margin-bottom: 6px; } }
+</style>
+</head>
+<body>
+  <section class="hero" id="hero">
+    <svg class="world" id="world" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <radialGradient id="sunG"><stop offset="0" stop-color="#fff3df" stop-opacity="1" /><stop offset=".35" stop-color="#f6dcb8" stop-opacity=".9" /><stop offset="1" stop-color="#dbb17f" stop-opacity="0" /></radialGradient>
+        <radialGradient id="moonG"><stop offset="0" stop-color="#e9f1f5" stop-opacity=".55" /><stop offset="1" stop-color="#e9f1f5" stop-opacity="0" /></radialGradient>
+        <linearGradient id="fogG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#efd3ab" stop-opacity="0" /><stop offset="1" stop-color="#efd3ab" stop-opacity=".55" /></linearGradient>
+        <linearGradient id="fogN" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fb8c4" stop-opacity="0" /><stop offset="1" stop-color="#9fb8c4" stop-opacity=".22" /></linearGradient>
+        <linearGradient id="mainG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a2127" /><stop offset="1" stop-color="#0b0b0b" /></linearGradient>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" /></filter>
+      </defs>
+    </svg>
+    <div class="bars"></div>
+    <div class="rain" id="rain"></div>
+    <div class="top"><b>punk6995</b><a href="#">Suivre sur X</a></div>
+    <div class="title" id="title">
+      <h1>10K<br /><span>→ 100K</span></h1>
+      <p>Un wallet public, du spot, zéro levier. Le chemin, trade par trade.</p>
+      <div class="row"><a class="cta-formation" href="#formation"><svg class="gift" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="1.5" fill="none" stroke="#0b0b0b" stroke-width="2.4"/><path d="M3 13h18M12 9v12" stroke="#0b0b0b" stroke-width="2.4"/><path d="M12 9c-1.5-4-6-4-6-1.5S10 9 12 9c2 0 6-0 6-1.5S13.5 5 12 9z" fill="none" stroke="#0b0b0b" stroke-width="2.2" stroke-linejoin="round"/></svg><span>Formation Offerte</span><span class="arr">→</span></a><small>Apprends la méthode avant de suivre le challenge.</small></div>
+    </div>
+    <div class="hud"><small>Wallet</small><div id="count">$10,000</div></div>
+    <button class="replay" id="replay">↻ rejouer</button>
+  </section>
+
+  <section>
+    <h2 class="big">Comment ça marche</h2>
+    <div class="how">
+      <div><b>Un wallet public</b><p>10&nbsp;000&nbsp;$ dessus. L'adresse est en ligne, tout le monde voit chaque trade.</p></div>
+      <div><b>Du live</b><p>J'explique pourquoi j'achète ou je vends avant de connaître le résultat.</p></div>
+      <div><b>Tout reste visible</b><p>Les bons trades comme les mauvais. Pas de compte démo, pas de screen retouché.</p></div>
+    </div>
+  </section>
+
+
+  <section id="formation">
+    <div class="form-box">
+      <span class="tag"><svg class="gift" style="width:18px;height:18px" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="1.5" fill="none" stroke="#0b0b0b" stroke-width="2.4"/><path d="M3 13h18M12 9v12" stroke="#0b0b0b" stroke-width="2.4"/><path d="M12 9c-1.5-4-6-4-6-1.5S10 9 12 9c2 0 6-0 6-1.5S13.5 5 12 9z" fill="none" stroke="#0b0b0b" stroke-width="2.2" stroke-linejoin="round"/></svg>Formation Offerte</span>
+      <h2 class="big">Avant de suivre le challenge, <span>apprends la méthode.</span></h2>
+      <p>Trois vidéos gratuites pour comprendre comment j'investis, avant de regarder le wallet bouger.</p>
+      <div class="videos">
+        <a class="vid" href="#" data-yt=""><div class="thumb"><img src="/challenge/assets/thumbs/video-1.jpg" alt="" loading="lazy" onerror="this.remove()" /><b>1/3</b><span class="play"></span></div><div class="txt">Pourquoi investir en 2026</div></a>
+        <a class="vid" href="#" data-yt=""><div class="thumb"><img src="/challenge/assets/thumbs/video-2.jpg" alt="" loading="lazy" onerror="this.remove()" /><b>2/3</b><span class="play"></span></div><div class="txt">Comment devenir riche</div></a>
+        <a class="vid" href="#" data-yt=""><div class="thumb"><img src="/challenge/assets/thumbs/video-3.jpg" alt="" loading="lazy" onerror="this.remove()" /><b>3/3</b><span class="play"></span></div><div class="txt">L'investissement on-chain</div></a>
+      </div>
+      <a class="cta-formation" href="#"><svg class="gift" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="1.5" fill="none" stroke="#0b0b0b" stroke-width="2.4"/><path d="M3 13h18M12 9v12" stroke="#0b0b0b" stroke-width="2.4"/><path d="M12 9c-1.5-4-6-4-6-1.5S10 9 12 9c2 0 6-0 6-1.5S13.5 5 12 9z" fill="none" stroke="#0b0b0b" stroke-width="2.2" stroke-linejoin="round"/></svg><span>Accéder à la formation</span><span class="arr">→</span></a>
+    </div>
+  </section>
+
+
+  <section class="cta" id="communaute">
+    <div class="comm">
+      <img src="/challenge/assets/punk6995-nobg.png" alt="" class="comm-punk" />
+      <h2 class="big">Rejoindre la communauté privée</h2>
+      <p>Là où je partage les trades du challenge en direct, avec ceux qui suivent.</p>
+      <a class="cta-formation comm-btn" href="#"><svg class="gift" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2" fill="none" stroke="#0b0b0b" stroke-width="2.4"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="#0b0b0b" stroke-width="2.4" stroke-linecap="round"/></svg><span>Rejoindre la communauté privée</span><span class="arr">→</span></a>
+    </div>
+  </section>
+
+  <section id="wallet">
+    <div class="rt-head">
+      <h2 class="big">Challenge en temps réel</h2>
+      <span class="wl-live" id="wlStatus"><i></i>Bientôt</span>
+    </div>
+
+    <div class="rt-card">
+      <div class="rt-top">
+        <div>
+          <small>Balance du challenge</small>
+          <div class="rt-bal" id="rtBal">—</div>
+          <div class="rt-chg" id="rtChg">Le challenge démarre bientôt</div>
+        </div>
+        <div class="rt-goal">
+          <div class="row"><span>Départ <b>$10,000</b></span><span id="rtX">—</span><span>Objectif <b>$100,000</b></span></div>
+          <div class="bar"><i id="rtBar" style="width:0"></i></div>
+        </div>
+      </div>
+
+      <div class="rt-chart">
+        <div class="rt-ranges" id="rtRanges"><button data-r="7">7J</button><button data-r="30">30J</button><button data-r="0" class="on">Tout</button></div>
+        <svg id="rtSvg" viewBox="0 0 1000 320" preserveAspectRatio="none" aria-label="Évolution de la balance du challenge">
+          <defs><linearGradient id="rtArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dbb17f" stop-opacity=".45"/><stop offset="1" stop-color="#dbb17f" stop-opacity="0"/></linearGradient></defs>
+          <g id="rtGrid"></g>
+          <path id="rtFill" fill="url(#rtArea)"/>
+          <path id="rtLine" fill="none" stroke="#dbb17f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+          <line id="rtCross" y1="0" y2="320" stroke="rgba(255,255,255,.25)" stroke-width="1" vector-effect="non-scaling-stroke" opacity="0"/>
+        </svg>
+        <div class="rt-dot" id="rtDot"></div>
+        <div class="rt-tip" id="rtTip"></div>
+        <div class="rt-axis" id="rtAxis"></div>
+        <div class="rt-wait" id="rtWait">La courbe démarre le jour du départ.</div>
+      </div>
+    </div>
+
+    <h3 class="rt-sub big">Mes wallets</h3>
+    <div class="rt-wallets">
+      <div class="rt-w">
+        <div class="rt-wh"><span class="chain sol">◎</span><b>Solana</b></div>
+        <div class="rt-field"><input readonly value="FRj7jSkViTCB5hm6aGbfYhGhCKdFPreXZxm5fC7sWeMz" id="addrSol" aria-label="Adresse Solana" /><button data-copy="addrSol">Copier</button></div>
+        <a class="rt-link" href="https://solscan.io/account/FRj7jSkViTCB5hm6aGbfYhGhCKdFPreXZxm5fC7sWeMz" id="lnkSol" target="_blank" rel="noopener">Voir sur Solscan ↗</a>
+      </div>
+      <div class="rt-w">
+        <div class="rt-wh"><span class="chain evm">Ξ</span><b>EVM</b><small>Ethereum, Base, Arbitrum…</small></div>
+        <div class="rt-field"><input readonly value="0xdf2a8e398b97899ecda4db93bb00eee386338d3a" id="addrEvm" aria-label="Adresse EVM" /><button data-copy="addrEvm">Copier</button></div>
+        <a class="rt-link" href="https://debank.com/profile/0xdf2a8e398b97899ecda4db93bb00eee386338d3a" id="lnkEvm" target="_blank" rel="noopener">Voir sur DeBank ↗</a>
+      </div>
+    </div>
+    <p class="wl-src">Soldes lus on-chain via l'API CoinStats, mis à jour toutes les minutes.</p>
+  </section>
+
+  <footer>Pas un conseil en investissement. Je peux perdre de l'argent, toi aussi si tu copies. N'investis que ce que tu peux perdre.</footer>
+<script>
+(function () {
+  const SCENE = document.documentElement.dataset.scene;
+  const NS = 'http://www.w3.org/2000/svg';
+  const world = document.getElementById('world'), hero = document.getElementById('hero');
+  const count = document.getElementById('count'), title = document.getElementById('title');
+  const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); (parent || world).appendChild(e); return e; };
+  let seed = 3; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+  // parallax layers: k = 0 (sky, almost still) … 1 (main hill) … >1 (foreground)
+  const layers = [];
+  const layer = k => { const g = el('g', {}); layers.push({ g, k }); return g; };
+
+  const PX = SCENE === 'pixel' ? 16 : 0;
+  const q = v => PX ? Math.round(v / PX) * PX : v;
+  const stairs = pts => {
+    if (!PX) return pts;
+    const out = []; let py = null;
+    pts.forEach(([x, y]) => { const qx = q(x), qy = q(y); if (py !== null) out.push([qx, py]); out.push([qx, qy]); py = qy; });
+    return out;
+  };
+  const toD = pts => 'M' + pts.map(p => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' L');
+  // a mountain ridge: sharp peaks from abs(sin) + softer detail
+  // ridged fractal value-noise: sharp, irregular peaks
+  const hash = n => { const v = Math.sin(n * 127.1 + 311.7) * 43758.5453; return v - Math.floor(v); };
+  const vnoise = x => { const i = Math.floor(x), f = x - i, u = f * f * (3 - 2 * f); return hash(i) * (1 - u) + hash(i + 1) * u; };
+  function ridgeLine(base, amp, f, ph) {
+    const pts = [];
+    for (let x = -700; x <= 2300; x += 8) {
+      let v = 0, a = 1, fr = f * 160, norm = 0;
+      for (let o = 0; o < 5; o++) {
+        const r = 1 - Math.abs(2 * vnoise(x * fr / 160 + ph * 17 + o * 31.7) - 1);
+        v += a * r * r; norm += a; a *= .5; fr *= 2.1;
+      }
+      pts.push([x, base - amp * 1.25 * (v / norm)]);
+    }
+    return stairs(pts);
+  }
+  const mountain = (g, pts, fill, op) => el('path', { d: toD(pts) + ' L2300 1400 L-700 1400 Z', fill, opacity: op == null ? 1 : op }, g);
+  function snowCaps(g, pts, line, color) {
+    const top = [], bot = [];
+    pts.forEach(([x, y]) => { const cap = Math.max(0, line - y) * .55; if (cap > 0) { top.push([x, y]); bot.push([x, y + cap]); } else if (top.length) { flush(); } });
+    flush();
+    function flush() { if (top.length > 2) el('path', { d: toD(top.concat(bot.reverse())) + ' Z', fill: color }, g); top.length = 0; bot.length = 0; }
+  }
+
+  // ---------- main climb curve (the chart) ----------
+  const Y0 = 790, Y1 = 230, N = 180; let pts = [];
+  for (let i = 0; i <= N; i++) {
+    const t = i / N;
+    const x = 120 + 1300 * Math.pow(Math.sin(t * Math.PI / 2), 0.95);
+    let y = Y0 - (Y0 - Y1) * (Math.exp(4.2 * t) - 1) / (Math.exp(4.2) - 1);
+    if (t < .42) y += 26 * Math.sin(Math.PI * t / .42);
+    y += Math.sin(i * .41) * 2 * (1 - t);
+    pts.push([x, y]);
+  }
+  pts[N] = [1420, Y1];
+  pts = stairs(pts);
+
+  // ---------- scenery ----------
+  if (SCENE === 'golden') {
+    const sky = layer(.05);
+    el('circle', { cx: 1180, cy: 470, r: 420, fill: 'url(#sunG)', opacity: .55 }, sky);
+    el('circle', { cx: 1180, cy: 470, r: 92, fill: '#fff1da' }, sky);
+    const birds = layer(.2);
+    [[520, 260], [560, 238], [600, 272], [980, 180], [1010, 196]].forEach(([x, y]) => el('path', { d: `M${x - 12} ${y - 4} Q${x - 6} ${y - 10} ${x} ${y} Q${x + 6} ${y - 10} ${x + 12} ${y - 4}`, stroke: '#33495a', 'stroke-width': 3, fill: 'none', 'stroke-linecap': 'round' }, birds));
+    const cols = [['#b7a596', .35, 560, 120, .0042, .4], ['#8f8b88', .5, 620, 150, .0036, 1.9], ['#5f6c74', .65, 690, 140, .0047, 3.1], ['#3a4851', .8, 760, 110, .0058, .8]];
+    cols.forEach(([c, k, base, amp, f, ph]) => {
+      const g = layer(k); mountain(g, ridgeLine(base, amp, f, ph), c);
+      el('rect', { x: -700, y: base - 40, width: 3000, height: 260, fill: 'url(#fogG)' }, g);
+    });
+  } else if (SCENE === 'pixel') {
+    const sky = layer(.05);
+    // pixel sun: concentric squares
+    [[0, 128, '#f3d6a8'], [16, 96, '#f6dfb9'], [32, 64, '#fbecd2']].forEach(([o, s, c]) => el('rect', { x: 1120 + o, y: 300 + o, width: s, height: s, fill: c }, sky));
+    el('rect', { x: 1104, y: 316, width: 160, height: 96, fill: '#f3d6a8' }, sky); el('rect', { x: 1136, y: 284, width: 96, height: 160, fill: '#f3d6a8' }, sky);
+    const clouds = layer(.18);
+    const cloud = (x, y, s) => [[1,0,4,1],[0,1,6,1],[0,2,7,1]].forEach(([a, b, w, h]) => el('rect', { x: x + a * s, y: y + b * s, width: w * s, height: h * s, fill: '#e7eef1' }, clouds));
+    cloud(620, 130, 12); cloud(900, 230, 16); cloud(-260, 120, 12); cloud(1700, 140, 16);
+    [['#87a3ae', .35, 600, 130, .0045, .4], ['#6f8d9c', .5, 660, 150, .0038, 2.2], ['#4f6c7b', .66, 730, 130, .005, 3.4], ['#33495a', .82, 790, 100, .006, .9]]
+      .forEach(([c, k, base, amp, f, ph]) => { const g = layer(k); const r = ridgeLine(base, amp, f, ph); mountain(g, r, c); if (k < .6) snowCaps(g, r, base - amp * .55, '#e7eef1'); });
+  } else {
+    const sky = layer(.03);
+    for (let i = 0; i < 140; i++) {
+      const s = rnd() < .15 ? 2.6 : 1.4;
+      el('circle', { cx: rnd() * 2400 - 400, cy: rnd() * 560, r: s, fill: '#eaf2f6', opacity: .5 + rnd() * .5, class: rnd() < .3 ? 'twinkle' : '', style: `animation-delay:-${(rnd() * 2.4).toFixed(2)}s` }, sky);
+    }
+    el('circle', { cx: 1210, cy: 190, r: 160, fill: 'url(#moonG)' }, sky);
+    const m = el('mask', { id: 'moonM' }, world.querySelector('defs'));
+    el('rect', { x: 1100, y: 80, width: 220, height: 220, fill: '#fff' }, m);
+    el('circle', { cx: 1236, cy: 172, r: 44, fill: '#000' }, m);
+    el('circle', { cx: 1210, cy: 190, r: 48, fill: '#eef4f7', mask: 'url(#moonM)' }, sky);
+    [['#30495a', .35, 600, 160, .0043, .5], ['#253a48', .5, 670, 170, .0036, 2.4], ['#1a2a35', .66, 740, 140, .005, 3.6], ['#121d25', .82, 800, 110, .006, 1.1]]
+      .forEach(([c, k, base, amp, f, ph]) => {
+        const g = layer(k); const r = ridgeLine(base, amp, f, ph); mountain(g, r, c);
+        snowCaps(g, r, base - amp * .5, k < .6 ? '#8fa9b6' : '#5f7987');
+        el('rect', { x: -700, y: base - 30, width: 3000, height: 260, fill: 'url(#fogN)' }, g);
+      });
+  }
+
+  // ---------- main hill + ridge + punk (k = 1) ----------
+  const main = layer(1);
+  const mainFill = SCENE === 'golden' ? '#1e2429' : SCENE === 'pixel' ? '#1a2228' : '#0c1319';
+  el('path', { d: `M-700 ${Y0} L120 ${Y0} ` + toD(pts).replace('M', 'L') + ` L1440 ${Y1 + 30} L2300 ${Y1 + 200} L2300 1400 L-700 1400 Z`, fill: mainFill }, main);
+  if (SCENE === 'night') snowCaps(main, pts.filter(p => p[0] > 1000), 520, '#cfdde4');
+  const ridgeGlow = el('path', { d: toD(pts), fill: 'none', stroke: '#dbb17f', 'stroke-width': 12, opacity: SCENE === 'pixel' ? 0 : .45, filter: 'url(#glow)' }, main);
+  const ridge = el('path', { d: toD(pts), fill: 'none', stroke: '#dbb17f', 'stroke-width': PX ? 6 : 5, 'stroke-linecap': PX ? 'square' : 'round', 'stroke-linejoin': PX ? 'miter' : 'round' }, main);
+  const punk = el('image', { href: '/challenge/assets/punk6995-nobg.png', width: 90, height: 90 }, main);
+
+  // ---------- foreground (k > 1) ----------
+  const fg = layer(1.25);
+  if (SCENE === 'golden') {
+    for (let i = 0; i < 26; i++) {
+      const x = -500 + i * 62 + rnd() * 30, h = 90 + rnd() * 120, y = 940;
+      el('path', { d: `M${x} ${y - h} L${x + h * .28} ${y} L${x - h * .28} ${y} Z`, fill: '#0e1215' }, fg);
+    }
+  } else if (SCENE === 'pixel') {
+    for (let i = 0; i < 20; i++) { const x = q(-500 + i * 80), h = q(48 + rnd() * 64); el('rect', { x, y: 960 - h, width: 32, height: h, fill: '#0e1418' }, fg); el('rect', { x: x - 16, y: 960 - h + 16, width: 64, height: 16, fill: '#0e1418' }, fg); }
+  } else {
+    for (let i = 0; i < 26; i++) {
+      const x = -500 + i * 62 + rnd() * 30, h = 90 + rnd() * 120, y = 950;
+      el('path', { d: `M${x} ${y - h} L${x + h * .28} ${y} L${x - h * .28} ${y} Z`, fill: '#05080b' }, fg);
+      el('path', { d: `M${x} ${y - h} L${x + h * .1} ${y - h * .64} L${x - h * .1} ${y - h * .64} Z`, fill: '#9fb4bf', opacity: .7 }, fg);
+    }
+  }
+
+  const L = ridge.getTotalLength(); ridge.style.strokeDasharray = L; ridgeGlow.style.strokeDasharray = L;
+  const usd = y => 10000 * Math.pow(10, (Y0 - y) / (Y0 - Y1));
+  const lerp = (a, b, k) => a + (b - a) * k;
+  const smooth = (a, b, x) => { const k = Math.min(1, Math.max(0, (x - a) / (b - a))); return k * k * (3 - 2 * k); };
+
+  const DUR = 6500; let raf, t0;
+  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  function render(t) {
+    const l = ease(Math.min(1, t / .82)) * L, p = ridge.getPointAtLength(l);
+    ridge.style.strokeDashoffset = L - l; ridgeGlow.style.strokeDashoffset = L - l;
+    const hop = Math.abs(Math.sin(l / 14)) * 4 * (1 - t);
+    punk.setAttribute('x', p.x - 45); punk.setAttribute('y', p.y - 86 - hop);
+    const z = smooth(.7, 1, t);
+    const s = lerp(2.7, 1, z), cx = lerp(p.x + 60, 800, z), cy = lerp(p.y - 70, 450, z);
+    layers.forEach(({ g, k }) => {
+      const sk = lerp(1, s, Math.min(k, 1.4)), ck = lerp(800, cx, k), cyk = lerp(450, cy, k);
+      g.setAttribute('transform', `translate(${800 - ck * sk} ${450 - cyk * sk}) scale(${sk})`);
+    });
+    count.textContent = '$' + Math.min(100000, Math.round(usd(p.y) / 100) * 100).toLocaleString('en-US');
+    title.style.opacity = smooth(.78, .95, t);
+    title.style.transform = `translateY(${(1 - smooth(.78, .95, t)) * 20}px)`;
+    hero.classList.toggle('wide', t > .72);
+  }
+
+  // ---------- confetti cannons (2 s) ----------
+  const rain = document.getElementById('rain');
+  let cseed = 9; const crnd = () => (cseed = (cseed * 16807) % 2147483647) / 2147483647;
+  function celebrate(still) {
+    rain.innerHTML = ''; cseed = 9;
+    const W = hero.clientWidth, H = hero.clientHeight;
+    const colors = ['#dbb17f', '#ffffff', '#0b0b0b', '#2a5bd7', '#e8c02e', '#9cc48a'];
+    const D = 2000, G = 2.6 * H;
+    for (let i = 0; i < 450; i++) {
+      const c = document.createElement('div'); c.className = 'conf';
+      c.style.background = colors[Math.floor(crnd() * colors.length)];
+      if (crnd() < .33) { c.style.width = '7px'; c.style.height = '16px'; }
+      rain.appendChild(c);
+      const left = i % 2 === 0;
+      const x0 = left ? -10 : W + 10, y0 = H * (.78 + crnd() * .1);
+      const ang = left ? (-62 - crnd() * 22) : (-118 + crnd() * 22);
+      const v = H * (1.5 + crnd() * 1.1);
+      const vx = Math.cos(ang * Math.PI / 180) * v, vy = Math.sin(ang * Math.PI / 180) * v;
+      const spin = (crnd() * 900 + 300) * (crnd() < .5 ? -1 : 1);
+      const delay = crnd() * 220, dur = D - delay, kf = [];
+      for (let k = 0; k <= 10; k++) {
+        const f = k / 10, tt = f * dur / 1000, drag = 1 - f * .45;
+        kf.push({ transform: `translate(${x0 + vx * tt * drag}px, ${y0 + vy * tt + .5 * G * tt * tt}px) rotate(${spin * f}deg) rotateX(${spin * f * 1.5}deg)`, opacity: f > .85 ? (1 - f) / .15 : 1 });
+      }
+      const a = c.animate(kf, { duration: dur, delay, easing: 'linear', fill: 'both' });
+      if (still) { a.currentTime = delay + dur * .35; a.pause(); }
+    }
+  }
+  function finish() { count.textContent = '$100,000'; count.classList.add('win'); hero.classList.add('done'); celebrate(); }
+  function frame(now) {
+    if (!t0) t0 = now;
+    const t = Math.min(1, (now - t0) / DUR); render(t);
+    if (t < 1) raf = requestAnimationFrame(frame); else finish();
+  }
+  function play() {
+    cancelAnimationFrame(raf); t0 = null; hero.classList.remove('done'); count.classList.remove('win'); rain.innerHTML = '';
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { render(1); finish(); return; }
+    raf = requestAnimationFrame(frame);
+  }
+  document.getElementById('replay').onclick = play;
+  const at = new URLSearchParams(location.search).get('at');
+  if (at !== null) { render(+at); if (+at >= 1) { count.classList.add('win'); hero.classList.add('done'); if (new URLSearchParams(location.search).get('c')) celebrate(true); } }
+  else setTimeout(play, 400);
+})();
+</script>
+
+<script>
+// Challenge en temps réel : données réelles via /api/wallets (Cloudflare Pages Function → CoinStats).
+// ?demo affiche une série de démonstration (maquette uniquement, jamais en public).
+(function () {
+  const START = 10000, GOAL = 100000;
+  const DEMO_MODE = new URLSearchParams(location.search).has('demo');
+  const $ = id => document.getElementById(id);
+  const svg = $('rtSvg'), line = $('rtLine'), fill = $('rtFill'), grid = $('rtGrid'), dot = $('rtDot'), tip = $('rtTip');
+  const cross = $('rtCross'), axis = $('rtAxis'), chart = svg.parentElement;
+  const usd = v => '$' + Math.round(v).toLocaleString('en-US');
+  const fmtDay = ts => new Date(ts).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+  let series = [], view = [], pts = [];
+
+  function demoSeries() {
+    const out = []; let seed = 5; const r = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const t0 = Date.UTC(2026, 9, 1) - 44 * 864e5;
+    for (let i = 0; i < 45; i++) {
+      const t = i / 44, trend = START + 1000 * (t * t * .6 + t * .4);
+      out.push([t0 + i * 864e5, Math.round(trend + (i && i < 44 ? (r() - .5) * 380 * Math.sin(Math.PI * t) : 0))]);
+    }
+    out[44][1] = 11000; return out;
+  }
+
+  function setBalance(total) {
+    const diff = total - START;
+    $('rtBal').textContent = usd(total);
+    $('rtChg').textContent = (diff >= 0 ? '+' : '−') + usd(Math.abs(diff)) + ' (' + (diff >= 0 ? '+' : '−') + Math.abs(diff / START * 100).toFixed(1).replace('.', ',') + ' %) depuis le départ';
+    $('rtChg').classList.toggle('dn', diff < 0);
+    $('rtX').textContent = (total / START).toFixed(2) + '×';
+    $('rtBar').style.width = Math.max(0, Math.min(100, diff / (GOAL - START) * 100)) + '%';
+    $('wlStatus').classList.add('on'); $('wlStatus').lastChild.textContent = 'En direct';
+  }
+
+  function draw(rangeDays) {
+    if (series.length < 2) { chart.classList.add('pending'); return; }
+    chart.classList.remove('pending');
+    const cut = rangeDays ? series[series.length - 1][0] - rangeDays * 864e5 : -Infinity;
+    view = series.filter(p => p[0] >= cut); if (view.length < 2) view = series.slice(-2);
+    const vals = view.map(p => p[1]), lo = Math.min(...vals) * .995, hi = Math.max(...vals) * 1.005 || 1;
+    pts = view.map((p, i) => [i / (view.length - 1) * 1000, 300 - (p[1] - lo) / (hi - lo) * 280]);
+    const d = 'M' + pts.map(p => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' L');
+    line.setAttribute('d', d); fill.setAttribute('d', d + ' L1000 320 L0 320 Z');
+    grid.innerHTML = [0, 1, 2, 3].map(k => `<line x1="0" x2="1000" y1="${20 + k * 93}" y2="${20 + k * 93}" stroke="rgba(255,255,255,.07)" vector-effect="non-scaling-stroke"/>`).join('');
+    axis.innerHTML = [0, .25, .5, .75, 1].map(f => `<span>${fmtDay(view[Math.round(f * (view.length - 1))][0])}</span>`).join('');
+    place(pts.length - 1, false);
+    const L = line.getTotalLength(); line.style.transition = 'none'; line.style.strokeDasharray = L; line.style.strokeDashoffset = L;
+    requestAnimationFrame(() => { line.style.transition = 'stroke-dashoffset 1.2s ease'; line.style.strokeDashoffset = 0; });
+  }
+  function place(i, showTip) {
+    if (!pts.length) return;
+    const r = svg.getBoundingClientRect(), cr = chart.getBoundingClientRect();
+    const x = pts[i][0] / 1000 * r.width + (r.left - cr.left), y = pts[i][1] / 320 * r.height + (r.top - cr.top);
+    dot.style.left = x + 'px'; dot.style.top = y + 'px'; tip.style.left = x + 'px'; tip.style.top = y + 'px';
+    tip.textContent = usd(view[i][1]) + ' · ' + fmtDay(view[i][0]);
+    tip.style.opacity = showTip ? 1 : 0;
+    cross.setAttribute('x1', pts[i][0]); cross.setAttribute('x2', pts[i][0]); cross.setAttribute('opacity', showTip ? 1 : 0);
+  }
+  svg.addEventListener('pointermove', e => { if (!pts.length) return; const r = svg.getBoundingClientRect(); place(Math.round(Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * (view.length - 1)), true); });
+  svg.addEventListener('pointerleave', () => place(pts.length - 1, false));
+  let range = 0;
+  document.querySelectorAll('#rtRanges button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('#rtRanges button').forEach(x => x.classList.toggle('on', x === b)); range = +b.dataset.r; draw(range);
+  });
+  addEventListener('resize', () => place(pts.length - 1, false));
+
+  async function load(first) {
+    if (DEMO_MODE) { series = demoSeries(); setBalance(11000); draw(range); return; }
+    try {
+      const [rw, rc] = await Promise.all([fetch('/api/challenge/wallets'), fetch('/api/challenge/chart')]);
+      if (!rw.ok) throw 0;
+      const d = await rw.json(), c = rc.ok ? await rc.json() : { chart: [] };
+      if (!d.started) { draw(0); return; }          // before the start date: placeholders stay
+      setBalance(d.total);
+      const pts = (c.chart || []).slice(), now = Date.now(), last = pts[pts.length - 1];
+      if (last && Math.floor(last[0] / 864e5) === Math.floor(now / 864e5)) last[1] = Math.round(d.total); else pts.push([now, Math.round(d.total)]);
+      const fresh = JSON.stringify(pts);
+      if (first || fresh !== JSON.stringify(series)) { series = pts; draw(range); }
+    } catch (e) { draw(0); }
+  }
+  load(true); if (!DEMO_MODE) setInterval(load, 60000);
+
+  document.querySelectorAll('[data-copy]').forEach(b => b.onclick = async () => {
+    const v = $(b.dataset.copy).value;
+    try { await navigator.clipboard.writeText(v); b.textContent = 'Copié ✓'; setTimeout(() => b.textContent = 'Copier', 1400); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>

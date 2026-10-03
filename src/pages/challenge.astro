@@ -1,0 +1,7 @@
+---
+// /challenge — landing du challenge 10K → 100K (page HTML autonome, CSS/JS inline).
+// Source : src/challenge/page.html · assets : public/challenge/assets · données : /api/challenge/*
+import page from '../challenge/page.html?raw';
+const html = page.replace(/^<!doctype html>\s*/i, '');
+---
+<Fragment set:html={html} />
